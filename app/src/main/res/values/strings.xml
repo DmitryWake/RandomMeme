@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Random Meme</string>
+    <string name="item_meme_go_to_link">Перейти к мему</string>
+</resources>
