@@ -4,7 +4,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ewake.randommeme.databinding.ItemMemeBinding
+import com.ewake.randommeme.presentation.extensions.picasso.setImage
 import com.ewake.randommeme.presentation.model.MemeItemModel
+import com.squareup.picasso.Picasso
 
 /**
  * @author Nikolaevsky Dmitry (@d.nikolaevskiy)
@@ -36,6 +38,7 @@ class MainPageAdapter : RecyclerView.Adapter<MainPageAdapter.MemeViewHolder>() {
             binding.apply {
                 title.text = item.title
                 author.text = item.author
+                image.setImage(item.url)
             }
         }
     }

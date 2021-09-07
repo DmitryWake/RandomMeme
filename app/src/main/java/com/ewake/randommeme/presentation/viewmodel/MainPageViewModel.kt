@@ -24,7 +24,7 @@ class MainPageViewModel @Inject constructor(private val api: Api) : ViewModel() 
 
     fun load() {
         CoroutineScope(Dispatchers.Main).launch {
-            val result = api.getRandomMemes(3)
+            val result = api.getRandomMemes(50)
             _memeItemsLiveData.postValue(
                 result.memes.map {
                     MemeItemModel(
