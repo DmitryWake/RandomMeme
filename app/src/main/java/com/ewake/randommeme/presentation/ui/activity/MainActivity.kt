@@ -6,7 +6,9 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.ewake.randommeme.R
 import com.ewake.randommeme.databinding.ActivityMainBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private val binding: ActivityMainBinding by lazy {

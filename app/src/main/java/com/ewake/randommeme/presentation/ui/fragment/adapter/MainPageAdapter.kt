@@ -27,7 +27,7 @@ class MainPageAdapter : RecyclerView.Adapter<MainPageAdapter.MemeViewHolder>() {
         holder.bind(items[position])
     }
 
-    override fun getItemCount(): Int = 0
+    override fun getItemCount(): Int = items.size
 
     inner class MemeViewHolder(private val binding: ItemMemeBinding) :
         RecyclerView.ViewHolder(binding.root) {
