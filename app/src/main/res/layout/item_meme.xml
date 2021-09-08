@@ -22,6 +22,7 @@
             android:textColor="@color/black"
             android:textSize="18sp"
             android:maxLines="3"
+            app:layout_constraintBottom_toTopOf="@id/author"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/image"
@@ -31,10 +32,22 @@
             android:id="@+id/image"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:layout_constraintDimensionRatio="3:4"
+            app:layout_constraintDimensionRatio="12:16"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/author"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="8dp"
+            android:maxLines="2"
+            app:layout_constraintBottom_toTopOf="@id/button_link"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="Автор: крутой парень 229" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/button_link"
@@ -42,25 +55,12 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:paddingHorizontal="40dp"
-            android:paddingVertical="8dp"
+            android:paddingBottom="8dp"
             android:text="@string/item_meme_go_to_link"
             app:cornerRadius="50dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/author" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/author"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/title"
-            tools:text="Автор: крутой парень 229"
-            android:layout_marginBottom="16dp"
-            android:maxLines="@integer/material_motion_duration_long_2"/>
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

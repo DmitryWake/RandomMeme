@@ -10,9 +10,12 @@ import retrofit2.http.Path
  */
 interface Api {
 
-    @GET("gimme/itmemes")
-    suspend fun getRandomMeme(): MemeResponse
+    @GET("gimme/{query}")
+    suspend fun getRandomMeme(@Path("query") query: String): MemeResponse
 
-    @GET("gimme/itmemes/{count}")
-    suspend fun getRandomMemes(@Path("count") count: Int): MemesResponse
+    @GET("gimme/{query}/{count}")
+    suspend fun getRandomMemes(
+        @Path("query") query: String,
+        @Path("count") count: Int = 50
+    ): MemesResponse
 }

@@ -19,6 +19,8 @@ class MainPageAdapter : RecyclerView.Adapter<MainPageAdapter.MemeViewHolder>() {
             notifyDataSetChanged()
         }
 
+    var onLinkClickListener: ((link: String) -> Unit)? = null
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MemeViewHolder {
         val binding =
             ItemMemeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -33,6 +35,12 @@ class MainPageAdapter : RecyclerView.Adapter<MainPageAdapter.MemeViewHolder>() {
 
     inner class MemeViewHolder(private val binding: ItemMemeBinding) :
         RecyclerView.ViewHolder(binding.root) {
+
+        init {
+            binding.buttonLink.setOnClickListener {
+                onLinkClickListener?.invoke(items[absoluteAdapterPosition].postLink)
+            }
+        }
 
         fun bind(item: MemeItemModel) {
             binding.apply {

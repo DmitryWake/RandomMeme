@@ -1,5 +1,7 @@
 package com.ewake.randommeme.presentation.ui.fragment
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -35,6 +37,8 @@ class MainPageFragment : Fragment() {
 
         binding.viewPager.adapter = viewPagerAdapter
 
+        viewPagerAdapter.onLinkClickListener = ::goToWebPage
+
         viewModel.apply {
             memeItemsLiveData.observe(viewLifecycleOwner, ::setItems)
             load()
@@ -50,5 +54,10 @@ class MainPageFragment : Fragment() {
 
     private fun setItems(list: List<MemeItemModel>) {
         viewPagerAdapter.items = list
+    }
+
+    private fun goToWebPage(link: String) {
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(link))
+        startActivity(intent)
     }
 }
