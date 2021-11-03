@@ -1,12 +1,16 @@
 package com.ewake.randommeme.presentation.di.hilt
 
+import android.content.Context
+import androidx.room.Room
 import com.ewake.randommeme.BuildConfig
 import com.ewake.randommeme.data.api.Api
+import com.ewake.randommeme.data.database.AppDatabase
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -61,4 +65,9 @@ class AppModule {
     ): Api {
         return retrofit.create(Api::class.java)
     }
+
+    @Provides
+    @Singleton
+    fun provideAppDatabase(@ApplicationContext context: Context) =
+        Room.databaseBuilder(context, AppDatabase::class.java, BuildConfig.DATABASE_NAME).build()
 }

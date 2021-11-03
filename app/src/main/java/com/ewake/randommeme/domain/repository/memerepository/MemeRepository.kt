@@ -2,6 +2,7 @@ package com.ewake.randommeme.domain.repository.memerepository
 
 import com.ewake.randommeme.data.api.model.MemeResponse
 import com.ewake.randommeme.data.api.model.MemesResponse
+import com.ewake.randommeme.presentation.model.MemeItemModel
 
 /**
  * Репозиторий по получению мемов
@@ -13,7 +14,7 @@ interface MemeRepository {
      * Получение рандомного мема по категории
      * @param query (Поисковый запрос категории, по дефолту "itmeme")
      */
-    suspend fun getRandomMeme(query: String = BASE_CATEGORY): Result<MemeResponse>
+    suspend fun getRandomMeme(query: String = BASE_CATEGORY): Result<MemeItemModel>
 
     /**
      * Получение рандомных мемов по категории
@@ -23,7 +24,7 @@ interface MemeRepository {
     suspend fun getRandomMemes(
         query: String = BASE_CATEGORY,
         count: Int = MAX_ITEMS_COUNT
-    ): Result<MemesResponse>
+    ): Result<List<MemeItemModel>>
 
     companion object {
         const val BASE_CATEGORY = "itmeme"

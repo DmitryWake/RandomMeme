@@ -3,6 +3,9 @@ package com.ewake.randommeme.domain.repository.memerepository
 import com.ewake.randommeme.data.api.Api
 import com.ewake.randommeme.data.api.model.MemeResponse
 import com.ewake.randommeme.data.api.model.MemesResponse
+import com.ewake.randommeme.data.database.AppDatabase
+import com.ewake.randommeme.domain.mapper.MemeMapper
+import com.ewake.randommeme.presentation.model.MemeItemModel
 import javax.inject.Inject
 
 /**
@@ -10,16 +13,20 @@ import javax.inject.Inject
  * @author Nikolaevsky Dmitry (@d.nikolaevskiy)
  */
 class MemeRepositoryImpl @Inject constructor(
-    private val api: Api
+    private val api: Api,
+    appDatabase: AppDatabase,
+    private val mapper: MemeMapper,
 ) : MemeRepository {
+
+    private val memeDao = appDatabase.memeDao()
 
     /**
      * Получение рандомного мема по категории
      * @param query (Поисковый запрос категории, по дефолту "itmeme")
      */
-    override suspend fun getRandomMeme(query: String): Result<MemeResponse> {
+    override suspend fun getRandomMeme(query: String): Result<MemeItemModel> {
         return kotlin.runCatching {
-            api.getRandomMeme(query)
+            mapper.responseToModel(api.getRandomMeme(query))
         }
     }
 
@@ -31,9 +38,16 @@ class MemeRepositoryImpl @Inject constructor(
     override suspend fun getRandomMemes(
         query: String,
         count: Int
-    ): Result<MemesResponse> {
-        return kotlin.runCatching {
+    ): Result<List<MemeItemModel>> {
+        kotlin.runCatching {
             api.getRandomMemes(query, count)
+        }.onSuccess {
+            memeDao.deleteAll()
+            memeDao.insert(mapper.responseListToEntityList(it.memes))
+        }
+
+        return kotlin.runCatching {
+            mapper.entityListToModelList(memeDao.getAll())
         }
     }
 }
